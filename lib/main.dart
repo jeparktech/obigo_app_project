@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './pages/starting_page.dart';
 
@@ -11,12 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'obigo 차계부 app',
-      initialRoute: '/',
-      routes: {
-        '/': (ctx) => StartingPage(),
-      },
+    return MultiProvider(
+      providers: [],
+      child: MaterialApp(
+        title: 'obigo 차계부 app',
+        initialRoute: '/',
+        routes: {
+          '/': (ctx) => StartingPage(),
+        },
+      ),
     );
   }
 }
