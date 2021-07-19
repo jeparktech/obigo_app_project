@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../pages/fuel_info_page.dart';
+
 class NewImage with ChangeNotifier {
   File? _image;
 
@@ -20,5 +22,6 @@ class NewImage with ChangeNotifier {
     }
     _image = File(f.path);
     notifyListeners();
+    Navigator.of(ctx).pushNamed(FuelInfoPage.routeName);
   }
 }
