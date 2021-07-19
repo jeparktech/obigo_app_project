@@ -15,7 +15,10 @@ class NewImage with ChangeNotifier {
     final _picker = ImagePicker();
     XFile? f = await _picker.pickImage(
         source: source, maxWidth: 1024, maxHeight: 1024);
-    _image = File(f!.path);
+    if (f == null) {
+      return;
+    }
+    _image = File(f.path);
     notifyListeners();
   }
 }
