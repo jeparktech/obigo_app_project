@@ -26,11 +26,7 @@ class ScanReceiptPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: GestureDetector(
-        onTap: () {
-          openBottomSheet(context);
-          // Navigator.push(context,
-          //   MaterialPageRoute(builder: (context) => ScanReceiptCamPage()));
-        },
+        onTap: () => openBottomSheet(context),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16),
           height: 70,
