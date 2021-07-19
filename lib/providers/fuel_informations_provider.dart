@@ -17,14 +17,14 @@ class FuelInformations with ChangeNotifier {
     return [..._items!];
   }
 
-  bool isListContains(String date) {
-    bool b = false;
+  FuelInformation? isListContains(String date) {
+    FuelInformation? dummy;
     _items!.forEach((fuelInfo) {
       if (fuelInfo.date == date) {
-        b = true;
+        dummy = fuelInfo;
       }
     });
-    return b;
+    return dummy;
   }
 
   void addFuelInformation(FuelInformation fuelInfo) {
@@ -34,7 +34,7 @@ class FuelInformations with ChangeNotifier {
     } else if (_items!.isEmpty) {
       _items!.add(fuelInfo);
     } else {
-      if (isListContains(fuelInfo.date)) {
+      if (isListContains(fuelInfo.date) != null) {
         //replace the fuelInformation
       } else {
         _items!.add(fuelInfo);
@@ -45,5 +45,10 @@ class FuelInformations with ChangeNotifier {
 
   void deleteFuelInformation(FuelInformation fuelInfo) {
     fuelDBHelper.deleteFuelInfo(fuelInfo.date);
+
+    if (isListContains(fuelInfo.date) != null && _items != null) {
+      _items!.remove(isListContains(fuelInfo.date));
+    }
+    notifyListeners();
   }
 }

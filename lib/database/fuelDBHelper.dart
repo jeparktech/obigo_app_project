@@ -40,7 +40,7 @@ class FuelDBHelper {
   }
 
   //Retrieves all fuelInfos from the fuelInfos table
-  Future<List<dynamic>> get fuelInfos async {
+  Future<List<FuelInformation>> get fuelInfos async {
     final db = await fuelDB;
 
     final List<Map<String, dynamic>> maps = await db!.query('fuelInfos');
