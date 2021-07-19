@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obigo_app_project/pages/fuel_info_page.dart';
 import 'package:obigo_app_project/pages/scan_receipt_page.dart';
 
 class CarManagerInfo extends StatefulWidget {
@@ -114,28 +115,31 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                   ),
               ),
                 SizedBox(width: 20),
-                Container(
-                  height: 130.0,
-                  width: 145.0,
-                  color: Colors.transparent,
+                GestureDetector(
+                  onTap: () {},
                   child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 0.5, color: Color(0xFF8E8E8E)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                         child : new Icon(Icons.summarize_outlined, color:Color(0xFF3E3E3E)),
-                        ),
-                        Center(
-                          child: new Text("Receipt History", 
-                          style: TextStyle(color: Colors.black, fontSize: 12),
-                          textAlign: TextAlign.center,),
-                        ),
-                      ]
-                    )),
+                    height: 130.0,
+                    width: 145.0,
+                    color: Colors.transparent,
+                    child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.5, color: Color(0xFF8E8E8E)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Center(
+                           child : new Icon(Icons.summarize_outlined, color:Color(0xFF3E3E3E)),
+                          ),
+                          Center(
+                            child: new Text("Receipt History", 
+                            style: TextStyle(color: Colors.black, fontSize: 12),
+                            textAlign: TextAlign.center,),
+                          ),
+                        ]
+                      )),
+                  ),
                 ),
             ],
           )
