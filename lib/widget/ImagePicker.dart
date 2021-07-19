@@ -14,7 +14,6 @@ class _ImagePickerState extends State<ImagePicker> {
   @override
   Widget build(BuildContext context) {
     final newImage = Provider.of<NewImage>(context);
-    var image = newImage.image;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -25,19 +24,12 @@ class _ImagePickerState extends State<ImagePicker> {
               title: Text("Photos"),
               onTap: () {
                 newImage.getPhoto(ImageSource.gallery, context);
-               
-Navigator.pushNamed(context, FuelInfoPage.routeName);
-                
-                
               }),
           ListTile(
               leading: Icon(Icons.camera),
               title: Text("Camera"),
               onTap: () {
                 newImage.getPhoto(ImageSource.camera, context);
-                if (image != null) {
-Navigator.pushNamed(context, FuelInfoPage.routeName);
-                }
               }),
         ],
       ),
