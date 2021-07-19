@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/widget/ImagePicker.dart';
 
+import '../widget/ImagePicker.dart';
 
-class ScanReceiptPage extends StatefulWidget {
- @override
-  _ScanReceiptPageState createState() => _ScanReceiptPageState();
-}
-
-class _ScanReceiptPageState extends State<ScanReceiptPage> {
+class ScanReceiptPage extends StatelessWidget {
+  static const routeName = '/scan-receipt-page';
 
   //camer button
   openBottomSheet(BuildContext context) {
@@ -24,13 +20,14 @@ class _ScanReceiptPageState extends State<ScanReceiptPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-          title: Text('Scan Receipt',
-            style: TextStyle(color: Colors.white,fontSize: 16),
-          ),
+        title: Text(
+          'Scan Receipt',
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-           openBottomSheet(context);
+          openBottomSheet(context);
           // Navigator.push(context,
           //   MaterialPageRoute(builder: (context) => ScanReceiptCamPage()));
         },
@@ -38,10 +35,11 @@ class _ScanReceiptPageState extends State<ScanReceiptPage> {
           padding: EdgeInsets.symmetric(vertical: 16),
           height: 70,
           color: Color(0xFF1AB5E6),
-          child: Text("주유 영수증 등록하기", 
-          style: TextStyle(
-            color: Colors.white, fontSize: 20),
-          textAlign: TextAlign.center,),
+          child: Text(
+            "주유 영수증 등록하기",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

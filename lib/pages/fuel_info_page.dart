@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FuelInfoPage extends StatefulWidget {
-@override
-  _FuelInfoPageState createState() => _FuelInfoPageState();
-}
+class FuelInfoPage extends StatelessWidget {
+  static const routeName = '/fuel-info-page';
 
-class _FuelInfoPageState extends State<FuelInfoPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
