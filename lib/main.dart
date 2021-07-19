@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './pages/starting_page.dart';
-import './pages/receipt_scan_page.dart';
+import './pages/car_manager_page.dart';
+import './pages/scan_receipt_page.dart';
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
 
@@ -26,10 +26,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'obigo 차계부 app',
+        theme: ThemeData(
+          primaryColor: Color(0xFF3E3E3E),
+        ),
         initialRoute: '/',
         routes: {
-          '/': (ctx) => StartingPage(),
-          ReceiptScanPage.routeName: (ctx) => ReceiptScanPage(),
+          '/': (ctx) => CarManagerPage(),
+          ScanReceiptPage.routeName: (ctx) => ScanReceiptPage(),
         },
       ),
     );
