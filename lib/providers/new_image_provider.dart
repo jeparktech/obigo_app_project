@@ -22,6 +22,6 @@ class NewImage with ChangeNotifier {
     }
     _image = File(f.path);
     notifyListeners();
-    Navigator.of(ctx).pushNamed(FuelInfoPage.routeName);
+    Navigator.of(ctx).pushNamed(FuelInfoPage.routeName, arguments: _image);
   }
 }
