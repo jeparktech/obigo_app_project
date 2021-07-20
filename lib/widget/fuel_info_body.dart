@@ -1,18 +1,29 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/widget/fuel_info_text.dart';
+
+import 'package:provider/provider.dart';
+
+import '../widget/fuel_info_text.dart';
 import '../model/fuel_information.dart';
-import '../functions/receipt_recognize.dart';
+import '../providers/new_fuel_information.dart';
 
 class FuelInfoBody extends StatelessWidget {
   final File loadedImage;
+  FuelInformation loadedFuelInfo = FuelInformation(
+      date: '',
+      fuelType: '',
+      quantity: 0,
+      unitPrice: 0,
+      totalPrice: 0,
+      stationName: '');
 
   FuelInfoBody(this.loadedImage);
 
   @override
   Widget build(BuildContext context) {
-    // FuelInformation fuelInfo = await ReceiptRecognize(loadedImage).detectFuelInfo();
+    final newInfo = Provider.of<NewFuelInformation>(context);
+
     return Container(
       color: Colors.white,
       child: ListView(
@@ -79,33 +90,31 @@ class FuelInfoBody extends StatelessWidget {
             ),
           ),
           //fuel info text field
-          FutureBuilder(
-            future: ReceiptRecognize(loadedImage).detectFuelInfo(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                print('loading..');
-                return Align(
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator());
-              } else {
-                print('gotcha!');
-                return FuelInfoText();
-              }
-            },
-          ),
+          newInfo.fuelInfo == null
+              ? FutureBuilder(
+                  future: newInfo.getNewFuelInfo(loadedImage),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      print('loading..');
+                      return Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Error: ${snapshot.error}',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      );
+                    } else {
+                      loadedFuelInfo = snapshot.data as FuelInformation;
+                      return FuelInfoText(loadedFuelInfo!);
+                    }
+                  },
+                )
+              : FuelInfoText(loadedFuelInfo!),
           //msg container
-          Container(
-            padding: EdgeInsets.all(10),
-            width: double.infinity,
-            child: Text(
-              "주유 영수증 정보가 누락되었습니다. 다시 촬영하거나 직접 입력해 주세요.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFFFF0000),
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -5,7 +5,6 @@ import '../database/fuelDBHelper.dart';
 
 class FuelInformations with ChangeNotifier {
   FuelDBHelper fuelDBHelper = FuelDBHelper();
-
   List<FuelInformation>? _items;
 
   FuelInformations() {
