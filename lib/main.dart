@@ -6,6 +6,7 @@ import './pages/scan_receipt_page.dart';
 import './pages/fuel_info_page.dart';
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
+import './providers/new_fuel_information.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => NewImage(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NewFuelInformation(),
         ),
       ],
       child: MaterialApp(

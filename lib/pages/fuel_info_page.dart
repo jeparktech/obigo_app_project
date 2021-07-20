@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/widget/fuel_info_body.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/new_image_provider.dart';
+
+import '../widget/fuel_info_body.dart';
 import '../widget/ImagePicker.dart';
 
 class FuelInfoPage extends StatelessWidget {
@@ -20,7 +23,7 @@ class FuelInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    File loadedImage = ModalRoute.of(context)!.settings.arguments as File;
+    File loadedImage = Provider.of<NewImage>(context, listen: false).image;
 
     return Scaffold(
       appBar: AppBar(

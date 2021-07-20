@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 
-class FuelInfoText extends StatelessWidget {
+import '../model/fuel_information.dart';
+
+class FuelInfoText extends StatefulWidget {
+  FuelInformation loadedFuelInfo;
+
+  FuelInfoText(this.loadedFuelInfo);
+  @override
+  _FuelInfoTextState createState() => _FuelInfoTextState();
+}
+
+class _FuelInfoTextState extends State<FuelInfoText> {
+  final _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 230,
         width: 350,
         child: Form(
+          key: _form,
           child: Column(
             children: <Widget>[
               Container(
@@ -24,9 +37,11 @@ class FuelInfoText extends StatelessWidget {
                       width: 250,
                       height: 30,
                       child: TextFormField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        initialValue: widget.loadedFuelInfo.stationName,
+                      ),
                     ),
                   ],
                 ),
@@ -46,9 +61,12 @@ class FuelInfoText extends StatelessWidget {
                       width: 250,
                       height: 30,
                       child: TextFormField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        initialValue:
+                            widget.loadedFuelInfo.totalPrice.toString(),
+                      ),
                     ),
                   ],
                 ),
@@ -68,9 +86,12 @@ class FuelInfoText extends StatelessWidget {
                       width: 250,
                       height: 30,
                       child: TextFormField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        initialValue:
+                            widget.loadedFuelInfo.unitPrice.toString(),
+                      ),
                     ),
                   ],
                 ),
@@ -90,9 +111,11 @@ class FuelInfoText extends StatelessWidget {
                       width: 250,
                       height: 30,
                       child: TextFormField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        initialValue: widget.loadedFuelInfo.quantity.toString(),
+                      ),
                     ),
                   ],
                 ),
@@ -112,9 +135,11 @@ class FuelInfoText extends StatelessWidget {
                       width: 250,
                       height: 30,
                       child: TextFormField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        initialValue: widget.loadedFuelInfo.date,
+                      ),
                     ),
                   ],
                 ),
