@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../model/fuel_information.dart';
+import '../providers/new_fuel_information.dart';
 
 class FuelInfoText extends StatefulWidget {
   FuelInformation loadedFuelInfo;

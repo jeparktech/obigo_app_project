@@ -6,11 +6,15 @@ import '../model/fuel_information.dart';
 import '../functions/receipt_recognize.dart';
 
 class NewFuelInformation with ChangeNotifier {
-  Future<FuelInformation>? fuelInfo;
+  Future<FuelInformation>? _fuelInfo;
+
+  Future<FuelInformation>? get fuelInfo {
+    return _fuelInfo;
+  }
 
   Future<FuelInformation> getNewFuelInfo(File image) async {
-    fuelInfo = ReceiptRecognize(image).detectFuelInfo();
+    _fuelInfo = ReceiptRecognize(image).detectFuelInfo();
 
-    return fuelInfo!;
+    return _fuelInfo!;
   }
 }

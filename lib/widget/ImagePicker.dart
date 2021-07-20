@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/new_image_provider.dart';
+import '../pages/fuel_info_page.dart';
 
 class ImagePicker extends StatelessWidget {
   @override
