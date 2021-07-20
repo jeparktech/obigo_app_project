@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FuelInfoText extends StatelessWidget {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -123,4 +125,6 @@ class FuelInfoText extends StatelessWidget {
           ),
         ));
   }
+
 }
+

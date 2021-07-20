@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/pages/fuel_info_page.dart';
 
 import '../pages/scan_receipt_page.dart';
 

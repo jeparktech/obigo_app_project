@@ -75,10 +75,6 @@ class FuelInfoBody extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 15),
               height: 175,
               width: 175,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                color: Colors.black,
-              )),
               child: Image.file(loadedImage, fit: BoxFit.cover),
             ),
           ),
