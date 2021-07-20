@@ -113,11 +113,11 @@ class FuelInfoBody extends StatelessWidget {
                       );
                     } else {
                       loadedFuelInfo = snapshot.data as FuelInformation;
-                      return FuelInfoText(loadedFuelInfo!);
+                      return FuelInfoText(loadedFuelInfo);
                     }
                   },
                 )
-              : FuelInfoText(loadedFuelInfo!),
+              : FuelInfoText(loadedFuelInfo),
           //msg container
         ],
       ),
