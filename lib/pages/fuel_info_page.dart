@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:obigo_app_project/widget/fuel_info_body.dart';
 
 
 import '../widget/ImagePicker.dart';
@@ -36,6 +37,7 @@ class FuelInfoPage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
+      body: FuelInfoBody(),
       bottomNavigationBar: GestureDetector(
         child: Row(
           children: <Widget>[
