@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+
 import '../widget/ImagePicker.dart';
+import '../model/fuel_information.dart';
+import '../functions/receipt_recognize.dart';
 
 class FuelInfoPage extends StatelessWidget {
   static const routeName = '/fuel-info-page';
@@ -20,8 +23,13 @@ class FuelInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     File loadedImage = ModalRoute.of(context)!.settings.arguments as File;
+    FuelInformation fuelInfo = await ReceiptRecognize(loadedImage).detectFuelInfo();
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pushNamed('/'),
+        ),
         centerTitle: true,
         title: Text(
           '주유 영수증 정보',
