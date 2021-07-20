@@ -131,7 +131,7 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
               SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, FuelInfoPage.routeName);
+                  //Navigator.pushNamed(context, FuelInfoPage.routeName);
                 },
                 child: Container(
                   height: 130.0,
@@ -142,7 +142,8 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                           border:
                               Border.all(width: 0.5, color: Color(0xFF8E8E8E)),
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -153,8 +154,8 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                             Center(
                               child: new Text(
                                 "Receipt History",
-                                style:
-                                    TextStyle(color: Colors.black, fontSize: 12),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12),
                                 textAlign: TextAlign.center,
                               ),
                             ),

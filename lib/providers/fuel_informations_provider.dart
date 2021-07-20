@@ -18,15 +18,15 @@ class FuelInformations with ChangeNotifier {
     return [..._items!];
   }
 
-  FuelInformation? isListContains(String date) {
-    FuelInformation? dummy;
-    _items!.forEach((fuelInfo) {
-      if (fuelInfo.date == date) {
-        dummy = fuelInfo;
-      }
-    });
-    return dummy;
-  }
+  // FuelInformation? isListContains(String date) {
+  //   FuelInformation? dummy;
+  //   _items!.forEach((fuelInfo) {
+  //     if (fuelInfo.date == date) {
+  //       dummy = fuelInfo;
+  //     }
+  //   });
+  //   return dummy;
+  // }
 
   void addFuelInformation(FuelInformation fuelInfo) {
     fuelDBHelper.insertFuelInfo(fuelInfo);
@@ -35,7 +35,9 @@ class FuelInformations with ChangeNotifier {
     } else if (_items!.isEmpty) {
       _items!.add(fuelInfo);
     } else {
-      if (isListContains(fuelInfo.date) != null) {
+      final prodIndex =
+          _items!.indexWhere((item) => item.date == fuelInfo.date);
+      if (prodIndex >= 0) {
         //replace the fuelInformation
       } else {
         _items!.add(fuelInfo);
@@ -47,9 +49,8 @@ class FuelInformations with ChangeNotifier {
   void deleteFuelInformation(FuelInformation fuelInfo) {
     fuelDBHelper.deleteFuelInfo(fuelInfo.date);
 
-    if (isListContains(fuelInfo.date) != null && _items != null) {
-      _items!.remove(isListContains(fuelInfo.date));
-    }
+    final infoIndex = _items!.removeWhere((item) => item.date == fuelInfo.date);
+
     notifyListeners();
   }
 }

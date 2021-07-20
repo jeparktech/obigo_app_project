@@ -4,7 +4,7 @@ class FuelInformation {
   final double quantity;
   final int unitPrice;
   final int totalPrice;
-  final String address;
+  final String stationName;
 
   FuelInformation(
       {required this.date,
@@ -12,11 +12,11 @@ class FuelInformation {
       required this.quantity,
       required this.unitPrice,
       required this.totalPrice,
-      required this.address});
+      required this.stationName});
 
   Map<String, dynamic> toMap() {
     return {
-      'address': address,
+      'stationName': stationName,
       'date': date,
       'fuelType': fuelType,
       'unitPrice': unitPrice,
@@ -27,6 +27,6 @@ class FuelInformation {
 
   @override
   String toString() {
-    return '----주유정보----\n주소: $address \n날짜: $date\n유종: $fuelType\n단가: $unitPrice\n수량: $quantity\n총액: $totalPrice\n----------------';
+    return '----주유정보----\n주소: $stationName \n날짜: $date\n유종: $fuelType\n단가: $unitPrice\n수량: $quantity\n총액: $totalPrice\n----------------';
   }
 }

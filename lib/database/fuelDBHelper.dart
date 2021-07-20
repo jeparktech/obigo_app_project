@@ -20,7 +20,7 @@ class FuelDBHelper {
       path,
       onCreate: (db, version) async {
         db.execute(
-            'CREATE TABLE fuelInfos(date TEXT PRIMARY KEY, address TEXT, fuelType TEXT, unitPrice INTEGER, quantity REAL, totalPrice INTEGER)');
+            'CREATE TABLE fuelInfos(date TEXT PRIMARY KEY, stationName TEXT, fuelType TEXT, unitPrice INTEGER, quantity REAL, totalPrice INTEGER)');
       },
       version: 1,
     );
@@ -47,7 +47,7 @@ class FuelDBHelper {
 
     return List.generate(maps.length, (i) {
       return FuelInformation(
-        address: maps[i]['address'],
+        stationName: maps[i]['stationName'],
         date: maps[i]['date'],
         fuelType: maps[i]['fuelType'],
         unitPrice: maps[i]['unitPrice'],
