@@ -10,7 +10,13 @@ import '../providers/new_fuel_information.dart';
 
 class FuelInfoBody extends StatelessWidget {
   final File loadedImage;
-  FuelInformation? loadedFuelInfo;
+  FuelInformation loadedFuelInfo = FuelInformation(
+      date: '',
+      fuelType: '',
+      quantity: 0,
+      unitPrice: 0,
+      totalPrice: 0,
+      stationName: '');
 
   FuelInfoBody(this.loadedImage);
 
@@ -88,7 +94,7 @@ class FuelInfoBody extends StatelessWidget {
             ),
           ),
           //fuel info text field
-          loadedFuelInfo == null
+          newInfo.fuelInfo == null
               ? FutureBuilder(
                   future: newInfo.getNewFuelInfo(loadedImage),
                   builder: (context, snapshot) {
