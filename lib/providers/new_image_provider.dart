@@ -13,7 +13,7 @@ class NewImage with ChangeNotifier {
     return _image!;
   }
 
-  void getPhoto(ImageSource source, BuildContext context) async {
+  Future<void> getPhoto(ImageSource source, BuildContext context) async {
     final _picker = ImagePicker();
     XFile? f = await _picker.pickImage(
         source: source, maxWidth: 1024, maxHeight: 1024);
