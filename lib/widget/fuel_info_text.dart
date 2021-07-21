@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../model/fuel_information.dart';
+import '../providers/new_fuel_information.dart';
 
 class FuelInfoText extends StatefulWidget {
-  FuelInformation loadedFuelInfo;
-
-
-  FuelInfoText(this.loadedFuelInfo);
   @override
   _FuelInfoTextState createState() => _FuelInfoTextState();
 }
@@ -17,6 +15,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
 
   @override
   Widget build(BuildContext context) {
+    var newInfo =
+        Provider.of<NewFuelInformation>(context, listen: false).fuelInfo;
     return Container(
         height: 230,
         width: 350,
@@ -42,7 +42,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: widget.loadedFuelInfo.stationName,
+                        initialValue: newInfo!.stationName,
                       ),
                     ),
                   ],
@@ -63,11 +63,11 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                       width: 250,
                       height: 30,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue:
-                            widget.loadedFuelInfo.totalPrice.toString(),
+                        initialValue: newInfo.totalPrice.toString(),
                       ),
                     ),
                   ],
@@ -88,11 +88,11 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                       width: 250,
                       height: 30,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue:
-                            widget.loadedFuelInfo.unitPrice.toString(),
+                        initialValue: newInfo.unitPrice.toString(),
                       ),
                     ),
                   ],
@@ -113,10 +113,11 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                       width: 250,
                       height: 30,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: widget.loadedFuelInfo.quantity.toString(),
+                        initialValue: newInfo.quantity.toString(),
                       ),
                     ),
                   ],
@@ -140,7 +141,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: widget.loadedFuelInfo.date,
+                        initialValue: newInfo.date,
                       ),
                     ),
                   ],

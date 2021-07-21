@@ -13,15 +13,17 @@ class NewImage with ChangeNotifier {
     return _image!;
   }
 
-  void getPhoto(ImageSource source, BuildContext ctx) async {
+  Future<void> getPhoto(ImageSource source, BuildContext context) async {
     final _picker = ImagePicker();
     XFile? f = await _picker.pickImage(
         source: source, maxWidth: 1024, maxHeight: 1024);
     if (f == null) {
       return;
     }
+
+    Navigator.of(context).pushNamed(FuelInfoPage.routeName);
+
     _image = File(f.path);
     notifyListeners();
-    Navigator.of(ctx).pushNamed(FuelInfoPage.routeName);
   }
 }

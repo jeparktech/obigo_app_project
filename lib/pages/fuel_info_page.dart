@@ -1,17 +1,24 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 import '../providers/new_image_provider.dart';
-
+import '../providers/new_fuel_information.dart';
 import '../widget/fuel_info_body.dart';
 import '../widget/ImagePicker.dart';
 
-class FuelInfoPage extends StatelessWidget {
+class FuelInfoPage extends StatefulWidget {
   static const routeName = '/fuel-info-page';
 
-//camer button
+  @override
+  _FuelInfoPageState createState() => _FuelInfoPageState();
+}
+
+class _FuelInfoPageState extends State<FuelInfoPage> {
+  var _isLoading = false;
+  var _isInit = true;
   openBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -21,10 +28,27 @@ class FuelInfoPage extends StatelessWidget {
     );
   }
 
+  Future<void> _storeInfo() async {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      File image = Provider.of<NewImage>(context).image;
+      try {
+        await Provider.of<NewFuelInformation>(context).getNewFuelInfo(image);
+      } catch (e) {
+        print(e);
+      }
+      setState(() {
+        _isLoading = false;
+      });
+    }
+    _isInit = false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    File loadedImage = Provider.of<NewImage>(context, listen: false).image;
-
+    _storeInfo();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -37,7 +61,7 @@ class FuelInfoPage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
-      body: FuelInfoBody(loadedImage),
+      body: FuelInfoBody(),
       bottomNavigationBar: Container(
         child: GestureDetector(
           child: Row(

@@ -7,24 +7,12 @@ import 'package:provider/provider.dart';
 import '../widget/fuel_info_text.dart';
 import '../model/fuel_information.dart';
 import '../providers/new_fuel_information.dart';
+import '../providers/new_image_provider.dart';
 
 class FuelInfoBody extends StatelessWidget {
-  final File loadedImage;
-  FuelInformation loadedFuelInfo = FuelInformation(
-      date: '',
-      fuelType: '',
-      quantity: 0,
-      unitPrice: 0,
-      totalPrice: 0,
-      stationName: ''
-  );
-
-  FuelInfoBody(this.loadedImage);
-
   @override
   Widget build(BuildContext context) {
-    final newInfo = Provider.of<NewFuelInformation>(context);
-
+    File loadedImage = Provider.of<NewImage>(context, listen: false).image;
     return Container(
       color: Colors.white,
       child: ListView(
@@ -91,31 +79,8 @@ class FuelInfoBody extends StatelessWidget {
             ),
           ),
           //fuel info text field
-          newInfo.fuelInfo == null
-              ? FutureBuilder(
-                  future: newInfo.getNewFuelInfo(loadedImage),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      print('loading..');
-                      return Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Error: ${snapshot.error}',
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      );
-                    } else {
-                      loadedFuelInfo = snapshot.data as FuelInformation;
-                      return FuelInfoText(loadedFuelInfo!);
-                    }
-                  },
-                )
-              : FuelInfoText(loadedFuelInfo!),
-              //_emptyText(),
+          FuelInfoText(),
+          //msg container
         ],
       ),
     );
