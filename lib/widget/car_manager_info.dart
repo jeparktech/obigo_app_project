@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obigo_app_project/pages/receipt_history_page.dart';
 
 import '../pages/scan_receipt_page.dart';
 
@@ -130,7 +131,7 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
               SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  //Navigator.pushNamed(context, FuelInfoPage.routeName);
+                  Navigator.pushNamed(context, ReceiptHistoryPage.routeName);
                 },
                 child: Container(
                   height: 130.0,

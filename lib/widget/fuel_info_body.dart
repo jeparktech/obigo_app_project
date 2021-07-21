@@ -16,7 +16,8 @@ class FuelInfoBody extends StatelessWidget {
       quantity: 0,
       unitPrice: 0,
       totalPrice: 0,
-      stationName: '');
+      stationName: ''
+  );
 
   FuelInfoBody(this.loadedImage);
 
@@ -114,9 +115,19 @@ class FuelInfoBody extends StatelessWidget {
                   },
                 )
               : FuelInfoText(loadedFuelInfo!),
-          //msg container
+              //_emptyText(),
         ],
       ),
     );
   }
+  // Widget _emptyText() {
+  //   if (FuelInfoText.checkEmpty) {
+  //     return Container(
+  //           padding: EdgeInsets.all(10),
+  //           width: double.infinity,
+  //           child: Text("주유 영수증 정보가 누락되었습니다. 다시 촬영하거나 직접 입력해 주세요.", textAlign: TextAlign.center,
+  //           style: TextStyle(fontSize: 12, color: Color(0xFFFF0000),),),
+  //         );
+  //   } else {}
+  // }
 }

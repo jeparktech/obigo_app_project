@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
-class FuelInfoText extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
-=======
 import '../model/fuel_information.dart';
 
 class FuelInfoText extends StatefulWidget {
   FuelInformation loadedFuelInfo;
+
 
   FuelInfoText(this.loadedFuelInfo);
   @override
@@ -16,7 +13,7 @@ class FuelInfoText extends StatefulWidget {
 
 class _FuelInfoTextState extends State<FuelInfoText> {
   final _form = GlobalKey<FormState>();
->>>>>>> c53f3aae5dc5dcdf2a36bdfca4ea4414e09c3090
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +150,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
           ),
         ));
   }
+
+  
 
 }
 

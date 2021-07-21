@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:http/http.dart' as http;
+
 import '../model/fuel_information.dart';
+
 
 class ReceiptRecognize {
   final File _image;
