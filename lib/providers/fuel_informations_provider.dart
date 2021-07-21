@@ -1,20 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../model/fuel_information.dart';
-import '../database/fuelDBHelper.dart';
+//import '../database/fuelDBHelper.dart';
 
 class FuelInformations with ChangeNotifier {
-  FuelDBHelper fuelDBHelper = FuelDBHelper();
-  List<FuelInformation>? _items;
-
-  FuelInformations() {
-    fuelDBHelper.fuelInfos.then((list) {
-      _items = list;
-    });
-  }
+  // FuelDBHelper fuelDBHelper = FuelDBHelper();
+  List<FuelInformation> _items = [];
 
   List<FuelInformation> get items {
-    return [..._items!];
+    return [..._items];
   }
 
   // FuelInformation? isListContains(String date) {
@@ -27,29 +24,45 @@ class FuelInformations with ChangeNotifier {
   //   return dummy;
   // }
 
-  void addFuelInformation(FuelInformation fuelInfo) {
-    fuelDBHelper.insertFuelInfo(fuelInfo);
-    if (_items == null) {
-      print('this list is null');
-    } else if (_items!.isEmpty) {
-      _items!.add(fuelInfo);
-    } else {
-      final prodIndex =
-          _items!.indexWhere((item) => item.date == fuelInfo.date);
-      if (prodIndex >= 0) {
-        //replace the fuelInformation
-      } else {
-        _items!.add(fuelInfo);
-      }
+  Future<void> addFuelInformation(FuelInformation fuelInfo) async {
+    final url = Uri.parse(
+        'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos.json');
+    try {
+      final response =
+          await http.post(url, body: json.encode(fuelInfo.toMap()));
+      final newFuelInfo = FuelInformation(
+          id: json.decode(response.body)['name'],
+          date: fuelInfo.date,
+          fuelType: fuelInfo.fuelType,
+          quantity: fuelInfo.quantity,
+          unitPrice: fuelInfo.unitPrice,
+          totalPrice: fuelInfo.totalPrice,
+          stationName: fuelInfo.stationName);
+      items.add(newFuelInfo);
+      notifyListeners();
+    } catch (error) {
+      throw error;
     }
-    notifyListeners();
   }
 
-  void deleteFuelInformation(FuelInformation fuelInfo) {
-    fuelDBHelper.deleteFuelInfo(fuelInfo.date);
+  Future<void> updateFuelInformation(
+      String id, FuelInformation newFuelInfo) async {
+    final fuelInfoIndex = _items.indexWhere((info) => info.id == id);
+    if (fuelInfoIndex >= 0) {
+      final url = Uri.parse(
+          'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos/$id.json');
+      try {
+        await http.patch(url, body: json.encode(newFuelInfo.toMap()));
+        _items[fuelInfoIndex] = newFuelInfo;
+        notifyListeners();
+      } catch (error) {
+        throw error;
+      }
+    }
+  }
 
-    final infoIndex = _items!.removeWhere((item) => item.date == fuelInfo.date);
-
-    notifyListeners();
+  Future<void> deleteFuelInformation(String id) async {
+    final url = Uri.parse(
+        'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos/$id.json');
   }
 }

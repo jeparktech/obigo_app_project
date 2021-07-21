@@ -21,7 +21,7 @@ class NewImage with ChangeNotifier {
       return;
     }
 
-    Navigator.of(context).pushNamed(FuelInfoPage.routeName);
+    Navigator.of(context).popAndPushNamed(FuelInfoPage.routeName);
 
     _image = File(f.path);
     notifyListeners();

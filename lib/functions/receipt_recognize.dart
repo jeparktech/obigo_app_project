@@ -17,6 +17,7 @@ class ReceiptRecognize {
     List<dynamic> _numInfoList = _detectNumInfo(str);
 
     var fuelInfo = FuelInformation(
+        id: '0',
         stationName: 'temprary stationName',
         date: _detectDate(str),
         fuelType: _detectFuelType(str),

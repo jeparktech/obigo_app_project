@@ -1,4 +1,5 @@
 class FuelInformation {
+  final String id;
   final String date;
   final String fuelType;
   final double quantity;
@@ -7,7 +8,8 @@ class FuelInformation {
   final String stationName;
 
   FuelInformation(
-      {required this.date,
+      {required this.id,
+      required this.date,
       required this.fuelType,
       required this.quantity,
       required this.unitPrice,
@@ -27,6 +29,6 @@ class FuelInformation {
 
   @override
   String toString() {
-    return '----주유정보----\n주소: $stationName \n날짜: $date\n유종: $fuelType\n단가: $unitPrice\n수량: $quantity\n총액: $totalPrice\n----------------';
+    return '----주유정보----\n주유소명: $stationName \n날짜: $date\n유종: $fuelType\n단가: $unitPrice\n수량: $quantity\n총액: $totalPrice\n----------------';
   }
 }
