@@ -231,20 +231,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-  sqflite:
-    dependency: "direct main"
-    description:
-      name: sqflite
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0+3"
-  sqflite_common:
-    dependency: transitive
-    description:
-      name: sqflite_common
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0+2"
   stack_trace:
     dependency: transitive
     description:
@@ -266,6 +252,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+<<<<<<< HEAD
   synchronized:
     dependency: transitive
     description:
@@ -280,6 +267,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+=======
+>>>>>>> 206663b1f5aa77721a71f5a312d933f1f40615d2
   term_glyph:
     dependency: transitive
     description:

@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 
 import '../providers/new_image_provider.dart';
 import '../providers/new_fuel_information.dart';
+import '../providers/fuel_informations_provider.dart';
 import '../widget/fuel_info_body.dart';
 import '../widget/ImagePicker.dart';
+import '../widget/fuel_info_text.dart';
 
 class FuelInfoPage extends StatefulWidget {
   static const routeName = '/fuel-info-page';
@@ -17,8 +19,10 @@ class FuelInfoPage extends StatefulWidget {
 }
 
 class _FuelInfoPageState extends State<FuelInfoPage> {
+  var _form = GlobalKey<FormState>();
   var _isLoading = false;
   var _isInit = true;
+
   openBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -26,6 +30,29 @@ class _FuelInfoPageState extends State<FuelInfoPage> {
         return ImagePicker();
       },
     );
+  }
+
+  Future<void> saveForm() async {
+    print('saveForm');
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _form.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await Provider.of<FuelInformations>(context, listen: false)
+          .addFuelInformation(
+              Provider.of<NewFuelInformation>(context, listen: false)
+                  .fuelInfo!);
+      print(Provider.of<NewFuelInformation>(context, listen: false).fuelInfo!);
+    } catch (error) {}
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).popAndPushNamed('/');
   }
 
   Future<void> _storeInfo() async {
@@ -65,7 +92,7 @@ class _FuelInfoPageState extends State<FuelInfoPage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : FuelInfoBody(),
+          : FuelInfoBody(_form),
       bottomNavigationBar: GestureDetector(
         child: Row(
           children: <Widget>[
@@ -84,7 +111,7 @@ class _FuelInfoPageState extends State<FuelInfoPage> {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: saveForm,
               child: Container(
                 width: MediaQuery.of(context).size.width / 2,
                 padding: EdgeInsets.symmetric(vertical: 20),

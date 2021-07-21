@@ -10,6 +10,8 @@ import '../providers/new_fuel_information.dart';
 import '../providers/new_image_provider.dart';
 
 class FuelInfoBody extends StatelessWidget {
+  final _form;
+  FuelInfoBody(this._form);
   @override
   Widget build(BuildContext context) {
     File loadedImage = Provider.of<NewImage>(context, listen: false).image;
@@ -79,7 +81,7 @@ class FuelInfoBody extends StatelessWidget {
             ),
           ),
           //fuel info text field
-          FuelInfoText(),
+          FuelInfoText(_form),
           //msg container
         ],
       ),
