@@ -252,14 +252,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-<<<<<<< HEAD
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   table_calendar:
     dependency: "direct main"
     description:
@@ -267,8 +259,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-=======
->>>>>>> 206663b1f5aa77721a71f5a312d933f1f40615d2
   term_glyph:
     dependency: transitive
     description:

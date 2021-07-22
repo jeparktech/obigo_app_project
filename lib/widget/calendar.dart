@@ -42,7 +42,7 @@ class _CalenderState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: <Widget> [
         Container(
           padding: EdgeInsets.all(10),
@@ -100,29 +100,52 @@ class _CalenderState extends State<Calendar> {
         endIndent: 0,
       ),
       const SizedBox(height: 8.0),
-      // Expanded(
-      //   child: ValueListenableBuilder<List<Event>>(
-      //     valueListenable: _selectedEvents,
-      //     builder: (context, value, _) {
-      //       return ListView.builder(
-      //         itemCount: value.length,
-      //         itemBuilder: (context, index) {
-      //           return Container(
-      //             height: 15,
-      //             decoration: BoxDecoration(
-      //               border: Border.all(),
-      //               borderRadius: BorderRadius.circular(12.0),
-      //             ),
-      //             child: ListTile(
-      //               onTap: () => print('${value[index]}'),
-      //               title: Text('${value[index]}'),
-      //             ),
-      //           );
-      //         },
-      //       );
-      //     },
-      //   ),
-      // ),
+      Expanded(
+        child: ValueListenableBuilder<List<Event>>(
+          valueListenable: _selectedEvents,
+          builder: (context, value, _) {
+            return ListView.builder(
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
+                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 15),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: 75,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(),    
+                  ),
+                      ),
+                      SizedBox(width: 15,),
+                      Container(
+                        height: 80,
+                        width: 270,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Color(0xFF1AB5E6),
+                        ),  
+                        child: ListTile(
+                          onTap: () => print('${value[index]}'),
+                          title: Text('${value[index]}'),
+                        ),  
+                      ),
+                    ],),
+                );
+              },
+            );
+          },
+        ),
+      ),
       ]
     );
   }
