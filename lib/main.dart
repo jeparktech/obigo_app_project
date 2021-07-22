@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import './pages/car_manager_page.dart';
 import './pages/scan_receipt_page.dart';
 import './pages/fuel_info_page.dart';
+import './pages/fuel_report_page.dart';
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
 import './providers/new_fuel_information.dart';
+import './providers/monthly_quantity_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => NewFuelInformation(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => MonthlyFuelQuantity(),
+        ),
       ],
       child: MaterialApp(
         title: 'obigo 차계부 app',
@@ -36,9 +41,10 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (ctx) => CarManagerPage(),
-          ScanReceiptPage.routeName: (ctx) => ScanReceiptPage(),
-          FuelInfoPage.routeName: (ctx) => FuelInfoPage(),
+          '/': (_) => CarManagerPage(),
+          ScanReceiptPage.routeName: (_) => ScanReceiptPage(),
+          FuelInfoPage.routeName: (_) => FuelInfoPage(),
+          FuelReportPage.routeName: (_) => FuelReportPage(),
         },
       ),
     );

@@ -26,7 +26,7 @@ dependencies:
   provider: ^5.0.0
   path: ^1.8.0
   http: ^0.13.3
-
+  syncfusion_flutter_charts: ^19.2.48
   image: ^3.0.2
   image_picker: ^0.8.2
 
