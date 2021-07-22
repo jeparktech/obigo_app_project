@@ -14,7 +14,6 @@ class FuelInfoBody extends StatelessWidget {
   Widget build(BuildContext context) {
     File loadedImage = Provider.of<NewImage>(context, listen: false).image;
     return Container(
-      color: Colors.white,
       child: ListView(
         shrinkWrap: true,
         children: [
