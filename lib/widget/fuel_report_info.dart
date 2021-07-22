@@ -23,8 +23,9 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
 
       final fuelInfos = Provider.of<FuelInformations>(context);
       fuelInfos.fetchAndSetFuelInfos().then((_) {
-        Provider.of<Statistics>(context, listen: false)
-            .addMonthlyQuantity(fuelInfos.items);
+        Provider.of<Statistics>(context, listen: false).addMonthlyQuantity(
+          fuelInfos.items,
+        );
         Provider.of<Statistics>(context, listen: false)
             .addMonthlyCostAndTimes(fuelInfos.items);
         setState(() {
