@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:obigo_app_project/pages/receipt_history_page.dart';
+import 'package:obigo_app_project/providers/event_provider.dart';
 import 'package:provider/provider.dart';
 
 import './pages/car_manager_page.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => MonthlyFuelQuantity(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => EventProvider(),
         ),
       ],
       child: MaterialApp(
