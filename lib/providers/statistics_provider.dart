@@ -9,7 +9,7 @@ class FuelQuantityData {
   FuelQuantityData({required this.month, required this.quantity});
 }
 
-class MonthlyFuelQuantity with ChangeNotifier {
+class Statistics with ChangeNotifier {
   List<FuelQuantityData> _monthlyQuantityData = [
     FuelQuantityData(month: 1, quantity: 0),
     FuelQuantityData(month: 2, quantity: 0),
