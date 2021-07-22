@@ -14,15 +14,32 @@ class FuelInformations with ChangeNotifier {
     return [..._items];
   }
 
-  // FuelInformation? isListContains(String date) {
-  //   FuelInformation? dummy;
-  //   _items!.forEach((fuelInfo) {
-  //     if (fuelInfo.date == date) {
-  //       dummy = fuelInfo;
-  //     }
-  //   });
-  //   return dummy;
-  // }
+  Future<void> fetchAndSetFuelInfos() async {
+    final url = Uri.parse(
+        'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos.json');
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<FuelInformation> loadedInformations = [];
+      extractedData.forEach((infoId, infoData) {
+        loadedInformations.add(
+          FuelInformation(
+              id: infoId,
+              date: infoData['date'],
+              fuelType: infoData['fuelType'],
+              quantity: infoData['quantity'],
+              unitPrice: infoData['unitPrice'],
+              totalPrice: infoData['totalPrice'],
+              stationName: infoData['stationName']),
+        );
+      });
+      _items = loadedInformations;
+      notifyListeners();
+      print(json.decode(response.body));
+    } catch (error) {
+      throw error;
+    }
+  }
 
   Future<void> addFuelInformation(FuelInformation fuelInfo) async {
     final url = Uri.parse(

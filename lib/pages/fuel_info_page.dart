@@ -9,7 +9,6 @@ import '../providers/new_fuel_information.dart';
 import '../providers/fuel_informations_provider.dart';
 import '../widget/fuel_info_body.dart';
 import '../widget/ImagePicker.dart';
-import '../widget/fuel_info_text.dart';
 
 class FuelInfoPage extends StatefulWidget {
   static const routeName = '/fuel-info-page';

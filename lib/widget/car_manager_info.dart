@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obigo_app_project/pages/receipt_history_page.dart';
 
 import '../pages/scan_receipt_page.dart';
+import '../pages/fuel_report_page.dart';
 
 class CarManagerInfo extends StatefulWidget {
   @override
@@ -64,7 +65,11 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: Icon(Icons.navigate_next)),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushNamed(FuelReportPage.routeName);
+                            },
+                            icon: Icon(Icons.navigate_next)),
                       ],
                     ),
                     Container(
