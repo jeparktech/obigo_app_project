@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widget/fuel_info_text.dart';
-import '../model/fuel_information.dart';
-import '../providers/new_fuel_information.dart';
 import '../providers/new_image_provider.dart';
 
 class FuelInfoBody extends StatelessWidget {
@@ -87,14 +85,4 @@ class FuelInfoBody extends StatelessWidget {
       ),
     );
   }
-  // Widget _emptyText() {
-  //   if (FuelInfoText.checkEmpty) {
-  //     return Container(
-  //           padding: EdgeInsets.all(10),
-  //           width: double.infinity,
-  //           child: Text("주유 영수증 정보가 누락되었습니다. 다시 촬영하거나 직접 입력해 주세요.", textAlign: TextAlign.center,
-  //           style: TextStyle(fontSize: 12, color: Color(0xFFFF0000),),),
-  //         );
-  //   } else {}
-  // }
 }

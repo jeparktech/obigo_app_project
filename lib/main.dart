@@ -9,7 +9,7 @@ import './pages/fuel_report_page.dart';
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
 import './providers/new_fuel_information.dart';
-import './providers/monthly_quantity_provider.dart';
+import 'providers/statistics_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           create: (_) => NewFuelInformation(),
         ),
         ChangeNotifierProvider(
-          create: (_) => MonthlyFuelQuantity(),
+          create: (_) => Statistics(),
         ),
       ],
       child: MaterialApp(
