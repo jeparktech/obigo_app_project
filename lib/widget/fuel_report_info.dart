@@ -25,6 +25,8 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
       fuelInfos.fetchAndSetFuelInfos().then((_) {
         Provider.of<Statistics>(context, listen: false)
             .addMonthlyQuantity(fuelInfos.items);
+        Provider.of<Statistics>(context, listen: false)
+            .addMonthlyCostAndTimes(fuelInfos.items);
         setState(() {
           _isLoading = false;
         });
@@ -38,16 +40,25 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
   Widget build(BuildContext context) {
     final statistics = Provider.of<Statistics>(context);
     var monthlyQttData = statistics.monthlyQuantityData;
+    var monthlyCostAndTimesData = statistics.monthlyCostAndTimesData;
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(),
           )
         : ListView(
             children: [
-              Container(height: 37),
+              Container(
+                height: 37,
+                child: Center(
+                  child: Text('Space for Car info'),
+                ),
+              ),
               Container(
                 height: 94,
                 color: Color(0xFFDCDCDC),
+                child: Center(
+                  child: Text('Space for choosing Peroid'),
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -70,13 +81,10 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
                         width: 2,
                       ),
                     ),
-                    // primaryYAxis: CategoryAxis(
-                    //   majorGridLines: MajorGridLines(width: 0),
-                    //   axisLine: AxisLine(
-                    //     color: Color(0xFF1AB5E6),
-                    //     width: 2,
-                    //   ),
-                    // ),
+                    primaryYAxis: NumericAxis(
+                      majorGridLines: MajorGridLines(width: 0),
+                      axisLine: AxisLine(width: 0),
+                    ),
                     series: <CartesianSeries>[
                       ColumnSeries<FuelQuantityData, int>(
                         color: Color(0xFF1AB5E6),
@@ -88,6 +96,7 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
                         emptyPointSettings:
                             EmptyPointSettings(mode: EmptyPointMode.average),
                         dataLabelSettings: DataLabelSettings(
+                            showZeroValue: false,
                             isVisible: true,
                             textStyle: TextStyle(
                                 fontSize: 10, color: Color(0xFF1AB5E6))),
@@ -97,9 +106,55 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
                 ),
               ),
               Divider(),
-              Container(
-                //decoration: BoxDecoration(border: Border.all()),
-                height: 265,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  width: 600,
+                  padding: EdgeInsets.all(8),
+                  //decoration: BoxDecoration(border: Border.all()),
+                  height: 265,
+                  child: SfCartesianChart(
+                    title: ChartTitle(
+                      text: 'Monthly Fuel Costs / Monthly Fueling Times',
+                      textStyle:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      alignment: ChartAlignment.near,
+                    ),
+                    primaryXAxis: CategoryAxis(
+                      majorGridLines: MajorGridLines(width: 0),
+                      axisLine: AxisLine(
+                        color: Color(0xFF1AB5E6),
+                        width: 2,
+                      ),
+                    ),
+                    primaryYAxis: NumericAxis(
+                      majorGridLines: MajorGridLines(width: 0),
+                      axisLine: AxisLine(
+                        width: 0,
+                      ),
+                    ),
+                    series: <CartesianSeries>[
+                      LineSeries<FuelCostAndTimesData, int>(
+                        color: Color(0xFFCD2B96),
+                        dataSource: monthlyCostAndTimesData,
+                        xValueMapper: (FuelCostAndTimesData data, _) =>
+                            data.month,
+                        yValueMapper: (FuelCostAndTimesData data, _) =>
+                            data.totalCost,
+                        emptyPointSettings:
+                            EmptyPointSettings(mode: EmptyPointMode.zero),
+                        dataLabelSettings: DataLabelSettings(
+                          showZeroValue: false,
+                          isVisible: true,
+                          textStyle: TextStyle(fontSize: 10),
+                        ),
+                        markerSettings: MarkerSettings(
+                          isVisible: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           );
