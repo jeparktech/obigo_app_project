@@ -3,7 +3,6 @@
 
 import 'dart:collection';
 
-
 import 'package:table_calendar/table_calendar.dart';
 
 /// Example event class.
@@ -14,9 +13,7 @@ class Event {
 
   @override
   String toString() => title;
-
 }
-
 
 
 /// Example events.
@@ -46,3 +43,5 @@ int getHashCode(DateTime key) {
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+
+
