@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/pages/receipt_history_page.dart';
+import 'package:obigo_app_project/model/fuel_information.dart';
+import 'package:provider/provider.dart';
 
 import '../pages/scan_receipt_page.dart';
 import '../pages/fuel_report_page.dart';
+import '../pages/receipt_history_page.dart';
+import '../providers/fuel_informations_provider.dart';
+import '../providers/statistics_provider.dart';
 
 class CarManagerInfo extends StatefulWidget {
   @override
@@ -10,8 +14,35 @@ class CarManagerInfo extends StatefulWidget {
 }
 
 class _CarManagerInfoState extends State<CarManagerInfo> {
+  var _isLoading = false;
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      Provider.of<FuelInformations>(context).fetchAndSetFuelInfos().then((_) {
+        var fuelList =
+            Provider.of<FuelInformations>(context, listen: false).items;
+        Provider.of<Statistics>(context, listen: false)
+            .getDataThisMonth(fuelList);
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final fuelList =
+        Provider.of<FuelInformations>(context, listen: false).items;
+    final statistics = Provider.of<Statistics>(context, listen: false);
     return Container(
       color: Color(0xFFDCDCDC),
       child: Column(
@@ -51,10 +82,10 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.all(10),
-                          width: 230,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
                           height: 20,
                           child: Text(
                             "Fuel Report",
@@ -65,33 +96,81 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(FuelReportPage.routeName);
-                            },
-                            icon: Icon(Icons.navigate_next)),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(FuelReportPage.routeName);
+                          },
+                          icon: Icon(Icons.navigate_next),
+                          iconSize: 40,
+                        ),
                       ],
                     ),
-                    Container(
-                      height: 180,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: new Icon(Icons.directions_car,
-                                color: Color(0xFFDADADA), size: 50),
-                          ),
-                          Center(
-                            child: new Text(
-                              "No vehicle data history yet",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
-                              textAlign: TextAlign.center,
+                    _isLoading
+                        ? Container(
+                            height: 175,
+                            child: Center(
+                              child: CircularProgressIndicator(),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          )
+                        : fuelList.isEmpty
+                            ? Container(
+                                height: 140,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: new Icon(Icons.directions_car,
+                                          color: Color(0xFFDADADA), size: 50),
+                                    ),
+                                    Center(
+                                      child: new Text(
+                                        "No vehicle data history yet",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 12),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                height: 175,
+                                //decoration: BoxDecoration(border: Border.all()),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 5),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Monthly Fuel Fill-ups'),
+                                        Text(
+                                          '${statistics.qttThisMonth.toStringAsFixed(3)}L',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Monthly Fuel Costs'),
+                                        Text(
+                                          '${statistics.totalCostThisMonth}원',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                   ],
                 ),
               ),
