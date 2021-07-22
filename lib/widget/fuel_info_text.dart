@@ -34,6 +34,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
   //   Navigator.of(context).popAndPushNamed('/');
   // }
 
+
   @override
   Widget build(BuildContext context) {
     var newInfo = Provider.of<NewFuelInformation>(context, listen: false);
@@ -256,4 +257,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
           ),
         ));
   }
+
+  
+
 }
+

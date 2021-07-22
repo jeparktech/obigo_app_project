@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../model/fuel_information.dart';
 
+
 class ReceiptRecognize {
   final File _image;
 

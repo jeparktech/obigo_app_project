@@ -77,10 +77,6 @@ class FuelInfoBody extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 15),
               height: 175,
               width: 175,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                color: Colors.black,
-              )),
               child: Image.file(loadedImage, fit: BoxFit.cover),
             ),
           ),
@@ -91,4 +87,14 @@ class FuelInfoBody extends StatelessWidget {
       ),
     );
   }
+  // Widget _emptyText() {
+  //   if (FuelInfoText.checkEmpty) {
+  //     return Container(
+  //           padding: EdgeInsets.all(10),
+  //           width: double.infinity,
+  //           child: Text("주유 영수증 정보가 누락되었습니다. 다시 촬영하거나 직접 입력해 주세요.", textAlign: TextAlign.center,
+  //           style: TextStyle(fontSize: 12, color: Color(0xFFFF0000),),),
+  //         );
+  //   } else {}
+  // }
 }
