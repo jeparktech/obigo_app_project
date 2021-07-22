@@ -47,6 +47,8 @@ class Statistics with ChangeNotifier {
     FuelCostAndTimesData(month: 11, totalCost: 0, fuelTimes: 0),
     FuelCostAndTimesData(month: 12, totalCost: 0, fuelTimes: 0),
   ];
+  double _qttThisMonth = 0;
+  int _totalCostThisMonth = 0;
 
   List<FuelQuantityData> get monthlyQuantityData {
     return _monthlyQuantityData;
@@ -54,6 +56,30 @@ class Statistics with ChangeNotifier {
 
   List<FuelCostAndTimesData> get monthlyCostAndTimesData {
     return _monthlyCostAndTimesData;
+  }
+
+  double get qttThisMonth {
+    return _qttThisMonth;
+  }
+
+  int get totalCostThisMonth {
+    return _totalCostThisMonth;
+  }
+
+  void getDataThisMonth(List<FuelInformation> fuelInfoList) {
+    int yearNow = DateTime.now().year;
+    int monthNow = DateTime.now().month;
+    _qttThisMonth = 0;
+    _totalCostThisMonth = 0;
+    fuelInfoList.forEach((fuelInfo) {
+      int infoYear = DateTime.parse(fuelInfo.date).year;
+      int infoMonth = DateTime.parse(fuelInfo.date).month;
+
+      if (yearNow == infoYear && monthNow == infoMonth) {
+        _qttThisMonth += fuelInfo.quantity;
+        _totalCostThisMonth += fuelInfo.totalPrice;
+      }
+    });
   }
 
   Map<String, dynamic> sumMonthlyData(
@@ -64,6 +90,7 @@ class Statistics with ChangeNotifier {
       int fuelTimes = 0;
       fuelInfoList.forEach((fuelInfo) {
         int infoMonth = DateTime.parse(fuelInfo.date).month;
+        //int infoYear = DateTime.parse(fuelInfo.date).year;
         if (infoMonth == month) {
           quantity += fuelInfo.quantity;
           totalCost += fuelInfo.totalPrice;
