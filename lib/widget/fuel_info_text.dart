@@ -34,7 +34,6 @@ class _FuelInfoTextState extends State<FuelInfoText> {
   //   Navigator.of(context).popAndPushNamed('/');
   // }
 
-
   @override
   Widget build(BuildContext context) {
     var newInfo = Provider.of<NewFuelInformation>(context, listen: false);
@@ -252,13 +251,23 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                   ],
                 ),
               ),
-              _isFieldEmpty ? Container(child: Text('empty')) : Container(),
+              _isFieldEmpty
+                  ? Container(
+                      child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: double.infinity,
+                      child: Text(
+                        "주유 영수증 정보가 누락되었습니다. 다시 촬영하거나 직접 입력해 주세요.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFFFF0000),
+                        ),
+                      ),
+                    ))
+                  : Container(),
             ],
           ),
         ));
   }
-
-  
-
 }
-

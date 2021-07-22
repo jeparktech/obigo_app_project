@@ -29,8 +29,8 @@ class _CarManagerInfoState extends State<CarManagerInfo> {
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: new Center(
                     child: new Text(
-                      "Car info",
-                      style: TextStyle(color: Colors.black, fontSize: 22),
+                      "Space for Car info",
+                      style: TextStyle(color: Colors.black, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
                   )),
