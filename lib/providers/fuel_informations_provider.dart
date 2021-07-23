@@ -19,7 +19,8 @@ class FuelInformations with ChangeNotifier {
         'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos.json');
     try {
       final response = await http.get(url);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final extractedData = json.decode(response.body);
+      if (extractedData == null) return;
       final List<FuelInformation> loadedInformations = [];
       extractedData.forEach((infoId, infoData) {
         loadedInformations.add(

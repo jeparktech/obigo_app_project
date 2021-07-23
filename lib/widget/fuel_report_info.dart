@@ -106,7 +106,12 @@ class _FuelReportInfoState extends State<FuelReportInfo> {
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(
+                color: Color(0xFFDCDCDC),
+                height: 2.5,
+                thickness: 2,
+                endIndent: 0,
+              ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Container(

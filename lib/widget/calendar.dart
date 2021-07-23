@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
-
-
 class Calendar extends StatefulWidget {
   @override
   _CalenderState createState() => _CalenderState();
@@ -35,11 +33,9 @@ class _CalenderState extends State<Calendar> {
         Provider.of<EventProvider>(context, listen: false)
             .eventsGenerated(fuelInfos.items);
         setState(() {
-          
           _selectedDay = _focusedDay;
           _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay));
           _isLoading = false;
-
         });
       });
     }
@@ -66,7 +62,7 @@ class _CalenderState extends State<Calendar> {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
       });
-    _selectedEvents.value = _getEventsForDay(selectedDay);
+      _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
 
