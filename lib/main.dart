@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obigo_app_project/pages/monthly_rh_page.dart';
 import 'package:obigo_app_project/pages/receipt_history_page.dart';
 import 'package:obigo_app_project/providers/event_provider.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,8 @@ class MyApp extends StatelessWidget {
           ScanReceiptPage.routeName: (_) => ScanReceiptPage(),
           FuelInfoPage.routeName: (_) => FuelInfoPage(),
           FuelReportPage.routeName: (_) => FuelReportPage(),
-          ReceiptHistoryPage.routeName: (ctx) => ReceiptHistoryPage(),
+          ReceiptHistoryPage.routeName: (_) => ReceiptHistoryPage(),
+          MonthlyRHPage.routeName: (_) => MonthlyRHPage(),
         },
       ),
     );

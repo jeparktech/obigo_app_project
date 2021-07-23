@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:obigo_app_project/model/fuel_information.dart';
+
 import 'package:obigo_app_project/providers/event_provider.dart';
 import 'package:obigo_app_project/providers/fuel_informations_provider.dart';
+import 'package:obigo_app_project/widget/event_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
+
 
 
 
@@ -71,20 +73,12 @@ class _CalenderState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
 
-    return _isLoading? Center(child: CircularProgressIndicator(),) :Column(
+    return _isLoading? Center(child: CircularProgressIndicator(),) :
+    Column(
       children: <Widget> [
-        Container(
-          padding: EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-
-            ],),
-        ),
         Container(
         padding: EdgeInsets.all(10),
         child: TableCalendar(
-
           calendarStyle: CalendarStyle(
             isTodayHighlighted: true,
             selectedDecoration: BoxDecoration(
@@ -137,72 +131,14 @@ class _CalenderState extends State<Calendar> {
             return ListView.builder(
               itemCount: value.length,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 12.0,
-                    vertical: 4.0,
-                  ),
-                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 15),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        height: 75,
-                        width: 50,
-                        child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text('${DateTime.parse(value[index].date).day}', 
-                              style: TextStyle(
-                                color: Colors.black, 
-                                fontSize: 30, 
-                                fontWeight: FontWeight.bold),
-                            ),
-                            Text('${DateFormat('EEE').format(DateTime.parse(value[index].date))}', 
-                              style: TextStyle(
-                                color: Colors.black, 
-                                fontSize: 15, 
-                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 15,),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        height: 80,
-                        width: 270,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Color(0xFF1AB5E6),
-                        ),  
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left: 15),
-                              width: 210,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('주유소명 : ${value[index].stationName}', style: TextStyle(color: Colors.white, fontSize: 13),),
-                                  Text('주유량 : ${value[index].quantity}', style: TextStyle(color: Colors.white, fontSize: 13),),
-                                  Text('주유금액 : ${value[index].totalPrice}', style: TextStyle(color: Colors.white, fontSize: 13),),
-                                ],),
-                            ),
-                            IconButton(
-                              onPressed: () {}, 
-                              icon: Icon(Icons.navigate_next, size: 30, color: Colors.white,)),
-                          ],),
-                      ),
-                    ],),
-                );
+                return EventBuilder(value, index);
               },
             );
           },
         ),
-      ),
-      ]
+      ),],
     );
   }
+
+  
 }

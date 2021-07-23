@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../model/fuel_information.dart';
 import '../providers/new_fuel_information.dart';
-import '../providers/fuel_informations_provider.dart';
 
 class FuelInfoText extends StatefulWidget {
   final _form;
