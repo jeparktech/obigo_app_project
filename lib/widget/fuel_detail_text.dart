@@ -4,19 +4,20 @@ import 'package:provider/provider.dart';
 import '../model/fuel_information.dart';
 import '../providers/new_fuel_information.dart';
 
-class FuelInfoText extends StatefulWidget {
+class FuelDetailText extends StatefulWidget {
   final _form;
-  FuelInfoText(this._form);
+
+  FuelDetailText(this._form);
   @override
-  _FuelInfoTextState createState() => _FuelInfoTextState();
+  _FuelDetailTextState createState() => _FuelDetailTextState();
 }
 
-class _FuelInfoTextState extends State<FuelInfoText> {
+class _FuelDetailTextState extends State<FuelDetailText> {
   var _isFieldEmpty = false;
 
   @override
   Widget build(BuildContext context) {
-    var newInfo = Provider.of<NewFuelInformation>(context, listen: false);
+    final savedInfo = Provider.of<NewFuelInformation>(context);
     return Container(
         width: 350,
         child: Form(
@@ -41,15 +42,15 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: newInfo.fuelInfo!.stationName,
+                        initialValue: savedInfo.fuelInfo!.stationName,
                         onSaved: (value) {
-                          newInfo.updateFuelInfo(FuelInformation(
-                              id: newInfo.fuelInfo!.id,
-                              date: newInfo.fuelInfo!.date,
-                              fuelType: newInfo.fuelInfo!.fuelType,
-                              quantity: newInfo.fuelInfo!.quantity,
-                              unitPrice: newInfo.fuelInfo!.unitPrice,
-                              totalPrice: newInfo.fuelInfo!.totalPrice,
+                          savedInfo.updateFuelInfo(FuelInformation(
+                              id: savedInfo.fuelInfo!.id,
+                              date: savedInfo.fuelInfo!.date,
+                              fuelType: savedInfo.fuelInfo!.fuelType,
+                              quantity: savedInfo.fuelInfo!.quantity,
+                              unitPrice: savedInfo.fuelInfo!.unitPrice,
+                              totalPrice: savedInfo.fuelInfo!.totalPrice,
                               stationName: value!));
                         },
                         validator: ((value) {
@@ -83,16 +84,16 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: newInfo.fuelInfo!.totalPrice.toString(),
+                        initialValue: savedInfo.fuelInfo!.totalPrice.toString(),
                         onSaved: (value) {
-                          newInfo.updateFuelInfo(FuelInformation(
-                              id: newInfo.fuelInfo!.id,
-                              date: newInfo.fuelInfo!.date,
-                              fuelType: newInfo.fuelInfo!.fuelType,
-                              quantity: newInfo.fuelInfo!.quantity,
-                              unitPrice: newInfo.fuelInfo!.unitPrice,
+                          savedInfo.updateFuelInfo(FuelInformation(
+                              id: savedInfo.fuelInfo!.id,
+                              date: savedInfo.fuelInfo!.date,
+                              fuelType: savedInfo.fuelInfo!.fuelType,
+                              quantity: savedInfo.fuelInfo!.quantity,
+                              unitPrice: savedInfo.fuelInfo!.unitPrice,
                               totalPrice: int.parse(value!),
-                              stationName: newInfo.fuelInfo!.stationName));
+                              stationName: savedInfo.fuelInfo!.stationName));
                         },
                         validator: ((value) {
                           if (value == null || value.isEmpty) {
@@ -125,16 +126,16 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: newInfo.fuelInfo!.unitPrice.toString(),
+                        initialValue: savedInfo.fuelInfo!.unitPrice.toString(),
                         onSaved: (value) {
-                          newInfo.updateFuelInfo(FuelInformation(
-                              id: newInfo.fuelInfo!.id,
-                              date: newInfo.fuelInfo!.date,
-                              fuelType: newInfo.fuelInfo!.fuelType,
-                              quantity: newInfo.fuelInfo!.quantity,
+                          savedInfo.updateFuelInfo(FuelInformation(
+                              id: savedInfo.fuelInfo!.id,
+                              date: savedInfo.fuelInfo!.date,
+                              fuelType: savedInfo.fuelInfo!.fuelType,
+                              quantity: savedInfo.fuelInfo!.quantity,
                               unitPrice: int.parse(value!),
-                              totalPrice: newInfo.fuelInfo!.totalPrice,
-                              stationName: newInfo.fuelInfo!.stationName));
+                              totalPrice: savedInfo.fuelInfo!.totalPrice,
+                              stationName: savedInfo.fuelInfo!.stationName));
                         },
                         validator: ((value) {
                           if (value == null || value.isEmpty) {
@@ -167,16 +168,16 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: newInfo.fuelInfo!.quantity.toString(),
+                        initialValue: savedInfo.fuelInfo!.quantity.toString(),
                         onSaved: (value) {
-                          newInfo.updateFuelInfo(FuelInformation(
-                              id: newInfo.fuelInfo!.id,
-                              date: newInfo.fuelInfo!.date,
-                              fuelType: newInfo.fuelInfo!.fuelType,
+                          savedInfo.updateFuelInfo(FuelInformation(
+                              id: savedInfo.fuelInfo!.id,
+                              date: savedInfo.fuelInfo!.date,
+                              fuelType: savedInfo.fuelInfo!.fuelType,
                               quantity: double.parse(value!),
-                              unitPrice: newInfo.fuelInfo!.unitPrice,
-                              totalPrice: newInfo.fuelInfo!.totalPrice,
-                              stationName: newInfo.fuelInfo!.stationName));
+                              unitPrice: savedInfo.fuelInfo!.unitPrice,
+                              totalPrice: savedInfo.fuelInfo!.totalPrice,
+                              stationName: savedInfo.fuelInfo!.stationName));
                         },
                         validator: ((value) {
                           if (value == null || value.isEmpty) {
@@ -208,16 +209,16 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        initialValue: newInfo.fuelInfo!.date,
+                        initialValue: savedInfo.fuelInfo!.date,
                         onSaved: (value) {
-                          newInfo.updateFuelInfo(FuelInformation(
-                              id: newInfo.fuelInfo!.id,
+                          savedInfo.updateFuelInfo(FuelInformation(
+                              id: savedInfo.fuelInfo!.id,
                               date: value!,
-                              fuelType: newInfo.fuelInfo!.fuelType,
-                              quantity: newInfo.fuelInfo!.quantity,
-                              unitPrice: newInfo.fuelInfo!.unitPrice,
-                              totalPrice: newInfo.fuelInfo!.totalPrice,
-                              stationName: newInfo.fuelInfo!.stationName));
+                              fuelType: savedInfo.fuelInfo!.fuelType,
+                              quantity: savedInfo.fuelInfo!.quantity,
+                              unitPrice: savedInfo.fuelInfo!.unitPrice,
+                              totalPrice: savedInfo.fuelInfo!.totalPrice,
+                              stationName: savedInfo.fuelInfo!.stationName));
                         },
                         validator: ((value) {
                           if (value == null || value.isEmpty) {

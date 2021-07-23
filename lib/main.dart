@@ -7,10 +7,12 @@ import './pages/car_manager_page.dart';
 import './pages/scan_receipt_page.dart';
 import './pages/fuel_info_page.dart';
 import './pages/fuel_report_page.dart';
+import './pages/fuel_detail_page.dart';
+
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
 import './providers/new_fuel_information.dart';
-import 'providers/statistics_provider.dart';
+import './providers/statistics_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
           FuelInfoPage.routeName: (_) => FuelInfoPage(),
           FuelReportPage.routeName: (_) => FuelReportPage(),
           ReceiptHistoryPage.routeName: (ctx) => ReceiptHistoryPage(),
+          FuelDetailPage.routeName: (ctx) => FuelDetailPage(),
         },
       ),
     );

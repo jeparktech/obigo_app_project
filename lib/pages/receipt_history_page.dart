@@ -4,10 +4,14 @@ import 'package:obigo_app_project/widget/calendar.dart';
 class ReceiptHistoryPage extends StatelessWidget {
   static const routeName = '/receipt-history-page';
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).popAndPushNamed('/'),
+        ),
         centerTitle: true,
         title: Text(
           'Receipt History',

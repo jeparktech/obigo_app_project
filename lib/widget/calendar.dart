@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/model/fuel_information.dart';
-import 'package:obigo_app_project/providers/event_provider.dart';
-import 'package:obigo_app_project/providers/fuel_informations_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+
+import '../pages/fuel_detail_page.dart';
+import '../model/fuel_information.dart';
+import '../providers/event_provider.dart';
+import '../providers/fuel_informations_provider.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -171,7 +173,7 @@ class _CalenderState extends State<Calendar> {
                               height: 80,
                               width: 270,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.0),
+                                borderRadius: BorderRadius.circular(18.0),
                                 color: Color(0xFF1AB5E6),
                               ),
                               child: Row(
@@ -211,6 +213,9 @@ class _CalenderState extends State<Calendar> {
                                   IconButton(
                                       onPressed: () {
                                         //value[index].id 로 FuelInformation 찾기
+                                        Navigator.of(context).pushNamed(
+                                            FuelDetailPage.routeName,
+                                            arguments: value[index]);
                                       },
                                       icon: Icon(
                                         Icons.navigate_next,
