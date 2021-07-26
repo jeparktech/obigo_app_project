@@ -1,11 +1,4 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/model/fuel_information.dart';
-
-import 'package:obigo_app_project/providers/event_provider.dart';
-import 'package:obigo_app_project/providers/fuel_informations_provider.dart';
-import 'package:obigo_app_project/widget/event_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -13,6 +6,7 @@ import '../model/fuel_information.dart';
 import '../providers/event_provider.dart';
 import '../providers/fuel_informations_provider.dart';
 import '../widget/event_builder.dart';
+import './event_builder.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -22,7 +16,6 @@ class Calendar extends StatefulWidget {
 class _CalenderState extends State<Calendar> {
   bool listPageOn = false;
   late final ValueNotifier<List<FuelInformation>> _selectedEvents;
-  late final ValueNotifier<List<FuelInformation>> _selectedMonthlyEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
@@ -47,9 +40,6 @@ class _CalenderState extends State<Calendar> {
         });
       });
     }
-    setState(() {
-      _selectedMonthlyEvents = ValueNotifier(_getEventsForMonth(_focusedDay));
-    });
     _isInit = false;
     super.didChangeDependencies();
   }
@@ -72,7 +62,6 @@ class _CalenderState extends State<Calendar> {
     var fuelInfoData = fuelInfo.getFuelInfoList;
 
     List<FuelInformation> monthlyList = [];
-    DateTime createdDate;
     fuelInfoData!.keys.forEach((k) {
       if (k.year == day.year && k.month == day.month) {
         monthlyList.addAll(fuelInfoData[k]!);
@@ -146,7 +135,7 @@ class _CalenderState extends State<Calendar> {
     return Container(
       height: 610,
       child: ValueListenableBuilder<List<FuelInformation>>(
-        valueListenable: _selectedMonthlyEvents,
+        valueListenable: ValueNotifier(_getEventsForMonth(_focusedDay)),
         builder: (context, value, _) {
           return ListView.builder(
             itemCount: value.length,

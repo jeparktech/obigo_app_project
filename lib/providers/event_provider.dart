@@ -1,8 +1,9 @@
 import 'dart:collection';
 
-import 'package:flutter/foundation.dart';
-import 'package:obigo_app_project/model/fuel_information.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter/foundation.dart';
+
+import '../model/fuel_information.dart';
 
 class EventProvider with ChangeNotifier {
   LinkedHashMap<DateTime, List<FuelInformation>>? _events;
@@ -11,7 +12,8 @@ class EventProvider with ChangeNotifier {
     return _events;
   }
 
-  LinkedHashMap<DateTime, List<FuelInformation>> eventsGenerated(List<FuelInformation> fuelInfoList) {
+  LinkedHashMap<DateTime, List<FuelInformation>> eventsGenerated(
+      List<FuelInformation> fuelInfoList) {
     final Map<DateTime, List<FuelInformation>> _kEventSource = Map.fromIterable(
         fuelInfoList,
         key: (item) {
@@ -33,7 +35,8 @@ class EventProvider with ChangeNotifier {
     return _events!;
   }
 
-  List<FuelInformation> getFuelInfoFromDay(DateTime day, List<FuelInformation> list) {
+  List<FuelInformation> getFuelInfoFromDay(
+      DateTime day, List<FuelInformation> list) {
     final listFromDay = list.where((val) {
       if (val.date != null) {
         return DateTime.parse(val.date) == day;
@@ -43,12 +46,9 @@ class EventProvider with ChangeNotifier {
     return listFromDay;
   }
 
-   int getHashCode(DateTime key) {
+  int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
   }
-
-
-
 }
 
 final kToday = DateTime.now();
