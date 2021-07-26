@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 
 import '../model/fuel_information.dart';
 
-
 class ReceiptRecognize {
   final File _image;
 
@@ -19,7 +18,7 @@ class ReceiptRecognize {
 
     var fuelInfo = FuelInformation(
         id: '0',
-        stationName: 'temprary stationName',
+        stationName: _detectStationName(str),
         date: _detectDate(str),
         fuelType: _detectFuelType(str),
         unitPrice: _numInfoList[0] as int,
@@ -37,6 +36,7 @@ class ReceiptRecognize {
     List<dynamic> numInfos = [];
     int unitPrice = 0;
     double quantity = 0;
+    int totalPrice = 0;
     bool gotFirstUnitPrice = false;
     bool gotFirstQuantity = false;
 
@@ -57,13 +57,40 @@ class ReceiptRecognize {
           quantity = matchToNum;
           gotFirstQuantity = true;
         }
+
+        if (unitPrice != 0 &&
+            quantity != 0 &&
+            matchToNum == (unitPrice * quantity)) {
+          totalPrice = matchToNum.floor();
+        }
       }
+    }
+
+    if (totalPrice == 0) {
+      totalPrice = (unitPrice * quantity).floor();
     }
 
     numInfos.add(unitPrice);
     numInfos.add(quantity);
-    numInfos.add((unitPrice * quantity).floor());
+    numInfos.add(totalPrice);
     return numInfos;
+  }
+
+  String _detectStationName(String str) {
+    String stationName = 'empty name';
+    var regex = new RegExp(r'([^ ]*주유소)');
+
+    str = str.replaceAll('\n', ' ');
+
+    var firstMatch = regex.firstMatch(str);
+    try {
+      stationName =
+          firstMatch!.input.substring(firstMatch.start, firstMatch.end);
+    } catch (_) {
+      stationName = "not detected";
+    }
+
+    return stationName;
   }
 
   // 유종 인식
@@ -128,12 +155,13 @@ class ReceiptRecognize {
     var url = Uri.parse(
         'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDtG8TAiP0xFYTNAle4DP2UfEGYqtAlzPM');
     var response = await http.post(url, body: json.encode(request_str));
-    //print('Response body: ${response.body}');
+    print('Response body: ${response.body}');
 
     var responseJson = json.decode(response.body);
     //print(responseJson);
     var str =
         '${responseJson["responses"][0]["textAnnotations"][0]["description"]}';
+    print(str);
 
     // //실제로 인식한 영수증 sample text
     await Future.delayed(Duration(seconds: 1));

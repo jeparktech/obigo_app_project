@@ -79,7 +79,7 @@ class _FuelInfoPageState extends State<FuelInfoPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pushNamed('/'),
+          onPressed: () => Navigator.of(context).popAndPushNamed('/'),
         ),
         centerTitle: true,
         title: Text(

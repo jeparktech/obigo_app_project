@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,10 @@ class FuelInformations with ChangeNotifier {
 
   List<FuelInformation> get items {
     return [..._items];
+  }
+
+  FuelInformation findById(String id) {
+    return _items.firstWhere((fuelInfo) => fuelInfo.id == id);
   }
 
   Future<void> fetchAndSetFuelInfos() async {
@@ -70,6 +75,14 @@ class FuelInformations with ChangeNotifier {
       final url = Uri.parse(
           'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos/$id.json');
       try {
+        if (_items[fuelInfoIndex].date == newFuelInfo.date &&
+            _items[fuelInfoIndex].fuelType == newFuelInfo.fuelType &&
+            _items[fuelInfoIndex].quantity == newFuelInfo.quantity &&
+            _items[fuelInfoIndex].stationName == newFuelInfo.stationName &&
+            _items[fuelInfoIndex].totalPrice == newFuelInfo.totalPrice &&
+            _items[fuelInfoIndex].unitPrice == newFuelInfo.unitPrice) {
+          return;
+        }
         await http.patch(url, body: json.encode(newFuelInfo.toMap()));
         _items[fuelInfoIndex] = newFuelInfo;
         notifyListeners();
@@ -82,5 +95,16 @@ class FuelInformations with ChangeNotifier {
   Future<void> deleteFuelInformation(String id) async {
     final url = Uri.parse(
         'https://obigo-app-project-default-rtdb.firebaseio.com/fuelInfos/$id.json');
+    final existingInfoIndex = _items.indexWhere((element) => element.id == id);
+    var exisitingInfo = _items[existingInfoIndex];
+    _items.removeAt(existingInfoIndex);
+    notifyListeners();
+
+    final response = await http.delete(url);
+    if (response.statusCode >= 400) {
+      _items.insert(existingInfoIndex, exisitingInfo);
+      notifyListeners();
+      throw HttpException('Could not delete');
+    }
   }
 }
