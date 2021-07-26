@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:obigo_app_project/pages/monthly_rh_page.dart';
-import 'package:obigo_app_project/pages/receipt_history_page.dart';
-import 'package:obigo_app_project/providers/event_provider.dart';
 import 'package:provider/provider.dart';
 
 import './pages/car_manager_page.dart';
@@ -9,11 +6,13 @@ import './pages/scan_receipt_page.dart';
 import './pages/fuel_info_page.dart';
 import './pages/fuel_report_page.dart';
 import './pages/fuel_detail_page.dart';
+import './pages/receipt_history_page.dart';
 
 import './providers/fuel_informations_provider.dart';
 import './providers/new_image_provider.dart';
 import './providers/new_fuel_information.dart';
 import './providers/statistics_provider.dart';
+import './providers/event_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -54,7 +53,6 @@ class MyApp extends StatelessWidget {
           FuelInfoPage.routeName: (_) => FuelInfoPage(),
           FuelReportPage.routeName: (_) => FuelReportPage(),
           ReceiptHistoryPage.routeName: (_) => ReceiptHistoryPage(),
-          MonthlyRHPage.routeName: (_) => MonthlyRHPage(),
           FuelDetailPage.routeName: (ctx) => FuelDetailPage(),
         },
       ),
