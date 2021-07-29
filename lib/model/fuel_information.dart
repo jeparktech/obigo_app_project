@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class FuelInformation {
   final String id;
   final String date;

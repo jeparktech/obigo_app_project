@@ -25,8 +25,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
             children: <Widget>[
               Container(
                 width: 330,
-                height: 35,
-                margin: EdgeInsets.all(10),
+                //height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -36,7 +36,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                     ),
                     Container(
                       width: 250,
-                      height: 30,
+                      //height: 30,
                       child: TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -57,6 +57,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                             setState(() {
                               _isFieldEmpty = true;
                             });
+                            return '정보를 입력해주세요';
                           }
                         }),
                       ),
@@ -66,8 +67,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
               ),
               Container(
                 width: 330,
-                height: 35,
-                margin: EdgeInsets.only(bottom: 6),
+                //height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -77,7 +78,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                     ),
                     Container(
                       width: 250,
-                      height: 30,
+                      //height: 30,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -99,7 +100,15 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                             setState(() {
                               _isFieldEmpty = true;
                             });
+                            return '정보를 입력해주세요.';
                           }
+                          if (int.tryParse(value) == null) {
+                            return '숫자만 입력해주세요.';
+                          }
+                          if (int.parse(value) <= 0) {
+                            return '0 보다 큰 숫자를 입력해주세요.';
+                          }
+                          return null;
                         }),
                       ),
                     ),
@@ -108,8 +117,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
               ),
               Container(
                 width: 330,
-                height: 35,
-                margin: EdgeInsets.only(bottom: 6),
+                //height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -119,7 +128,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                     ),
                     Container(
                       width: 250,
-                      height: 30,
+                      //height: 30,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -141,7 +150,15 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                             setState(() {
                               _isFieldEmpty = true;
                             });
+                            return '정보를 입력해주세요.';
                           }
+                          if (int.tryParse(value) == null) {
+                            return '숫자만 입력해주세요.';
+                          }
+                          if (int.parse(value) <= 0) {
+                            return '0 보다 큰 숫자를 입력해주세요.';
+                          }
+                          return null;
                         }),
                       ),
                     ),
@@ -150,8 +167,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
               ),
               Container(
                 width: 330,
-                height: 35,
-                margin: EdgeInsets.only(bottom: 6),
+                //height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -161,7 +178,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                     ),
                     Container(
                       width: 250,
-                      height: 30,
+                      //height: 30,
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -183,7 +200,15 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                             setState(() {
                               _isFieldEmpty = true;
                             });
+                            return '정보를 입력해주세요.';
                           }
+                          if (double.tryParse(value) == null) {
+                            return '숫자만 입력해주세요.';
+                          }
+                          if (double.parse(value) <= 0) {
+                            return '0 보다 큰 숫자를 입력해주세요.';
+                          }
+                          return null;
                         }),
                       ),
                     ),
@@ -192,8 +217,8 @@ class _FuelInfoTextState extends State<FuelInfoText> {
               ),
               Container(
                 width: 330,
-                height: 35,
-                margin: EdgeInsets.only(bottom: 6),
+                //height: 35,
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -203,7 +228,7 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                     ),
                     Container(
                       width: 250,
-                      height: 30,
+                      //height: 30,
                       child: TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),

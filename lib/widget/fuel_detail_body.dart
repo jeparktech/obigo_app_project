@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../widget/fuel_detail_text.dart';
-import '../model/fuel_information.dart';
 
 class FuelDetailBody extends StatelessWidget {
   final _form;

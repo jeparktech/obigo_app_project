@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../providers/new_image_provider.dart';

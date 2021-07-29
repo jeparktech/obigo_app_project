@@ -88,7 +88,7 @@ class _FuelDetailPageState extends State<FuelDetailPage> {
                       ),
                       FlatButton(
                         onPressed: () {
-                          Navigator.of(ctx).pop(true);
+                          Navigator.of(ctx).pop(false);
                         },
                         child: Text('아니요'),
                       ),
@@ -133,15 +133,17 @@ class _FuelDetailPageState extends State<FuelDetailPage> {
                         onPressed: () {
                           Navigator.of(ctx).pop(true);
                           Provider.of<FuelInformations>(context, listen: false)
-                              .deleteFuelInformation(_fuelInfo.id);
-                          Navigator.of(context).pushReplacementNamed(
-                              ReceiptHistoryPage.routeName);
+                              .deleteFuelInformation(_fuelInfo.id)
+                              .then((_) {
+                            Navigator.of(context).pushReplacementNamed(
+                                ReceiptHistoryPage.routeName);
+                          });
                         },
                         child: Text('예'),
                       ),
                       FlatButton(
                         onPressed: () {
-                          Navigator.of(ctx).pop(true);
+                          Navigator.of(ctx).pop(false);
                         },
                         child: Text('아니요'),
                       ),

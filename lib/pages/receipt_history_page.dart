@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:obigo_app_project/widget/calendar.dart';
+import '../widget/calendar.dart';
 
 class ReceiptHistoryPage extends StatelessWidget {
   static const routeName = '/receipt-history-page';
@@ -19,10 +19,7 @@ class ReceiptHistoryPage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
-      body:
-        Calendar(),
-        
-
+      body: Calendar(),
     );
   }
 }

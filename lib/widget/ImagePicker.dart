@@ -3,8 +3,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/new_image_provider.dart';
-// import '../providers/new_fuel_information.dart';
-// import '../pages/fuel_info_page.dart';
 
 class ImagePicker extends StatelessWidget {
   // Future<void> storeInfos(NewImage newImage, ImageSource imageSource, BuildContext context) async {
