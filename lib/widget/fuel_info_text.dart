@@ -249,9 +249,10 @@ class _FuelInfoTextState extends State<FuelInfoText> {
                             setState(() {
                               _isFieldEmpty = true;
                             });
+                            return '정보를 입력해 주세요';
                           }
                           if (!RegExp(r'202[0-9]-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])')
-                                  .hasMatch(value!) ||
+                                  .hasMatch(value) ||
                               value.length > 10) {
                             return '잘못된 형식입니다. (YYYY-MM-DD)';
                           }
