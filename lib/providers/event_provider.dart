@@ -38,10 +38,7 @@ class EventProvider with ChangeNotifier {
   List<FuelInformation> getFuelInfoFromDay(
       DateTime day, List<FuelInformation> list) {
     final listFromDay = list.where((val) {
-      if (val.date != null) {
-        return DateTime.parse(val.date) == day;
-      }
-      return false;
+      return DateTime.parse(val.date) == day;
     }).toList();
     return listFromDay;
   }
